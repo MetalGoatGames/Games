@@ -22,14 +22,14 @@ namespace ShibaRescue
 
         public void playStartSound()
         {
-            var bleep = new System.Media.SoundPlayer("C:\\Users\\Sarah\\Desktop\\shibaRescueImages\\PixelRiver.wav");
+            var bleep = new System.Media.SoundPlayer("Audio\\PixelRiver.wav");
             bleep.Play();
         }
 
 
         public void StopStartSound()
         {
-            var bleep = new System.Media.SoundPlayer("C:\\Users\\Sarah\\Desktop\\shibaRescueImages\\PixelRiver.wav");
+            var bleep = new System.Media.SoundPlayer("Audio\\PixelRiver.wav");
             bleep.Stop();
         }
 
