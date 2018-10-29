@@ -15,18 +15,37 @@ namespace ShibaRescue
     {
 
         int counter = 0;
+        int shibaCounter = 0;
         int len = 0;
         string txt;
 
         public introduction()
         {
             InitializeComponent();
+            var pos = this.PointToScreen(lblStoryScroll.Location);
+            //  label in the text to be transparent
+            pos = msgBox.PointToClient(pos);
+            lblStoryScroll.Parent = msgBox;
+            lblStoryScroll.Location = pos;
+            lblStoryScroll.BackColor = Color.Transparent;
+            // button to be transparent
+            this.btnNext.MouseHover += (s, e) =>
+            {
+                this.btnNext.BackColor = Color.DeepSkyBlue;
+            };
+
+        }
+
+        public void playIntroSound()
+        {
+            var music = new System.Media.SoundPlayer("C:\\Users\\Sarah\\ShibaRescueMedia\\Audio\\Monplaisir.wav");
+            music.PlayLooping();
         }
 
         public void playTextSound()
         {
-            var textSound = new System.Media.SoundPlayer("C:\\Users\\Audio\\radar1.wav");
-            textSound.PlayLooping();
+          //  var textSound = new System.Media.SoundPlayer("C:\\Users\\Sarah\\Desktop\\shibaRescueImages\\homemade_bleep.wav");
+          //  textSound.PlayLooping();
         }
 
         public static string story;
@@ -39,16 +58,20 @@ namespace ShibaRescue
         }
 
 
+
         public void stopTextSound()
         {
-            var textSound = new System.Media.SoundPlayer("C:\\Users\\Audio\\radar1.wav");
-            textSound.Stop();
+            //var textSound = new System.Media.SoundPlayer("C:\\Users\\Sarah\\Desktop\\shibaRescueImages\\homemade_bleep.wav");
+            //textSound.Stop();
         }
 
         private void introduction_Load(object sender, EventArgs e)
         {
             string characterChoice = choosePlayer.characterChoice;
             playTextSound();
+            label1.Hide();
+            label1.BackColor = Color.Transparent;
+            playIntroSound();
             txt = lblStoryScroll.Text;
             len = txt.Length;
             timer1.Start();
@@ -74,33 +97,73 @@ namespace ShibaRescue
                     timer1.Stop();
                     stopTextSound();
                 }
-            }
+                switch (shibaCounter)
+                {
+                    case 1:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_1;
+                        break;
+                    case 5:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_2;
+                        break;
+                    case 10:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_3;
+                        break;
+                    case 15:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_4;
+                        break;
+                    case 20:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_5;
+                        break;
+                    case 25:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_6;
+                        break;
+                    case 30:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_7;
+                        break;
+                    case 35:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_8;
+                        break;
+                    case 40:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_9;
+                        break;
+                    case 45:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_10;
+                        break;
+                    case 50:
+                        this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen_01_11;
+                        break;
+                }
+                        shibaCounter++;
+                }
 
         }
 
         int storycounter = 0;
 
-        private void btnNext_Click(object sender, EventArgs e)
+
+        public void btnNext_Click(object sender, EventArgs e)
         {
             storycounter++;
             txt = lblStoryScroll.Text;
             switch (storycounter)
             {
                 case 1:
-                    txt = "And so, it was for many ages the shibas lived day in day out being at one with the surrounding world.  Until one day the shibas awoke to a peculiar smell. It seemed a strange cloud had wafted over the town from the nearby lake. It started like any other day *Unchosen character* awoke and visited the compost pile to see how things were marinating.  That’s when he noticed it.  A smell unlike the usual smell of the waste recycling. A smell that immediately clogged his nose and made his eyes begin to water…..";
+                    this.BackgroundImage = ShibaRescue.Properties.Resources.introduction_screen;
+                    txt = "And so, it was for many ages the shibas lived day in day out being at one with the surrounding world...";
                     timer1.Start();
                     playTextSound();
                     break;
                 case 2:
-                    txt = "That could be the intro for Bombastus or for another character we introduce and kill off.";
-                    timer1.Start();
-                    playTextSound();
+                    msgBox.Hide();
+                    lblStoryScroll.ForeColor = System.Drawing.Color.Red;
+                    label1.Show();
                     break;
                 case 3:
-                    txt = "The ooze that poured forth from the stygian abyss clung tight to Vulgate Village but previously it had been a place of joy and light.  Shiba Inu after Shiba had lived and loved in Vulgate. Many a compost pile and home were made in the borders of this beautiful land. Maybe one day the village could return to its former greatness.  ";
-                    timer1.Start();
-                    playTextSound();
+                    choosePlayer chooseplayer = new choosePlayer();
+                    chooseplayer.Show();
+                    this.Hide();
                     break;
+
             }
             counter = 0;
         }
@@ -110,7 +173,6 @@ namespace ShibaRescue
             this.Close();
 
         }
-
     }
 }
 
