@@ -12,7 +12,6 @@ namespace ShibaRescue
 {
     public partial class startScreen : Form
     {
-        // PixelRiver.wav Copy right goes to Trevor Lentz. Available at: https://opengameart.org/content/pixel-river
         public startScreen()
         {
             InitializeComponent();
@@ -22,21 +21,27 @@ namespace ShibaRescue
 
         public void playStartSound()
         {
-            var bleep = new System.Media.SoundPlayer("Audio\\PixelRiver.wav");
+            var bleep = new System.Media.SoundPlayer("C:\\Users\\Sarah\\ShibaRescueMedia\\Audio\\PixelRiver.wav");
             bleep.Play();
         }
 
 
         public void StopStartSound()
         {
-            var bleep = new System.Media.SoundPlayer("Audio\\PixelRiver.wav");
+            var bleep = new System.Media.SoundPlayer("C:\\Users\\Sarah\\ShibaRescueMedia\\Audio\\PixelRiver.wav");
             bleep.Stop();
+        }
+
+        public void playStartButtonSound()
+        {
+
         }
 
 
         private void btnStart_Click(object sender, EventArgs e)
         {
             StopStartSound();
+            playStartButtonSound();
             introduction intro = new introduction();
             intro.Show();
             this.Hide();
