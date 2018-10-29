@@ -11,8 +11,11 @@ using System.Windows.Forms;
 
 namespace ShibaRescue
 {
+
     public partial class choosePlayer : Form
     {
+        public static string characterName = "";
+
         public choosePlayer()
         {
             InitializeComponent();
@@ -21,8 +24,21 @@ namespace ShibaRescue
 
         private void choosePlayer_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Hero... Think twice before choosing your destiny...", "Beware, you don't want them to follow you...");
+            playChooseCharacterMusic();
         }
+
+        public void playChooseCharacterMusic()
+        {
+            var music = new System.Media.SoundPlayer("C:\\Users\\Sarah\\ShibaRescueMedia\\Audio\\heroic.wav");
+            music.PlayLooping();
+        }
+
+        public void stopChooseCharacterMusic()
+        {
+            var music = new System.Media.SoundPlayer("C:\\Users\\Sarah\\ShibaRescueMedia\\Audio\\heroic.wav");
+            music.Stop();
+        }
+
 
         private void btnBombastus_Click(object sender, EventArgs e)
         {
@@ -30,6 +46,7 @@ namespace ShibaRescue
             screenA AScreen = new screenA();
             AScreen.Show();
             this.Hide();
+            stopChooseCharacterMusic();
         }
 
         private void btnTellus_Click(object sender, EventArgs e)
@@ -37,6 +54,7 @@ namespace ShibaRescue
             choosePlayer.characterChoice = "Tellus";
             screenA AScreen = new screenA();
             AScreen.Show();
+            stopChooseCharacterMusic();
             this.Close();
         }
     }
